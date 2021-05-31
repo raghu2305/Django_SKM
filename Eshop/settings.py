@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '4sr!x=o*3)!#zst77m!9$g=9$%0*e4@tj9(8a=4tinqh77u!0+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = false
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'skmobiles.herokuapp.com/']
 
