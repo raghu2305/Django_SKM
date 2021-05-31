@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load cart %}
+{% load custom_filter %}
+<div class="container" style="background: radial-gradient(#fff,skyblue);">
+    <div class="border-2 rounded ">
+        <p class="display-4 pl-4 ml-4" style="text-align: center;"><b>Your Orders</b></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Product</th>
+                    <th style="text-align: center;">Date</th>
+                    <th style="text-align: center;">Price</th>
+                    <th style="text-align: center;">Quantity</th>
+                    <th style="text-align: center;">Total</th>
+                    <th style="text-align: center;">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for order in orders %}
+                <tr>
+                    <td scope="row"><img src="{{order.product.image.url}}" style="height: 50px; width: 50px;"></td>
+                    <td>{{order.product.name}}</td>
+                    <td style="text-align: center;">{{order.date}}</td>
+                    <td style="text-align: center;">{{order.product.price|currency}}</td>
+                    <td style="text-align: center;">{{order.quantity}}</td>
+                    <td style="text-align: center;">{{order.quantity|multiply:order.price|currency}}</td>
+                    {% if order.status %}
+                    <td><small class="badge badge-success">Completed</small></td>
+                    {% else %}
+                    <td><small class="badge badge-warning">Pending</small></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+
+            </tbody>
+
+            
+            
+        </table>
+
+            
+            
+    </div>
+</div>
+
+
+
+  
+{% endblock %}
