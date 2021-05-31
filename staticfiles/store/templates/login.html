@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+
+    <style>
+      .footer{
+    background: #000;
+    color: #8a8a8a;
+    font-size: 14px;
+    padding: 60px 0 20px;
+}
+
+.footer hr{
+    border: none;
+    background: #b5b5b5;
+    height: 1px;
+    margin: 20px 0;
+}
+
+.copyright{
+    text-align: center;
+}
+
+.social{
+    padding-left: 500px;
+}
+
+.social .fa {
+    padding left: 20px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 10%;
+  }
+  
+  .fa:hover {
+      opacity: 0.7;
+  }
+  
+  .fa-facebook {
+    background: #3B5998;
+    color: white;
+  }
+
+  .fa-twitter {
+    background: #00acee;
+    color: white;
+  }
+
+  .fa-instagram {
+    background: #FD1D1D;
+    color: white;
+  }  
+  
+.menu-icon{
+    width: 28px;
+    margin-left: 20px;
+    display: none;
+}
+
+
+
+/*--------- media query for menu ---------*/
+
+@media only screen and (max-width: 800px){
+    .social{
+        padding-left: 290px;
+    }
+
+    .product_view{
+      width: 10px;
+    }
+}
+
+
+/*--------- media query for less than 600 screen size ---------*/
+
+@media only screen and (max-width: 600px){
+    .social{
+        padding-left: 190px;
+    }
+    
+}
+
+
+
+/*--------- media query for less than 550 screen size ---------*/
+
+@media only screen and (max-width: 550px){
+    
+    .social{
+        padding-left: 160px;
+    }
+}
+
+/*--------- media query for less than 500 screen size ---------*/
+
+@media only screen and (max-width: 500px){
+    
+    .social{
+        padding-left: 140px;
+    }
+}
+
+/*--------- media query for less than 450 screen size ---------*/
+
+@media only screen and (max-width: 450px){
+    
+    .social{
+        padding-left: 115px;
+    }
+}
+
+/*--------- media query for less than 400 screen size ---------*/
+
+@media only screen and (max-width: 400px){
+    
+    .social{
+        padding-left: 90px;
+    }
+    
+}
+
+
+
+    </style>
+    
+    <title>SKM</title>
+
+    
+  </head>
+  <!--<body style="background: radial-gradient(#fff,#ffd6d6);">-->
+    <body>
+
+
+    <!--------Navbar-------->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light m-4">
+      <div class="container-fluid"  style="background-color: #ffd6d6;">
+        <a class="navbar-brand" href="/"><b>S K Mobiles</b></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Store</a>
+            </li>
+            
+          </ul>
+          
+          <ul class="navbar-nav my-2 my-lg-0 mr-2">
+            {% if request.session.customer %}
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/cart">Cart
+              <span class="badge badge-info">{{request.session.cart.keys|length}}</span>
+              <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/orders">Orders</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/logout">Logout</a>
+            </li>
+            {% else %}  
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/cart">Cart
+              <span class="badge badge-info">{{request.session.cart.keys|length}}</span>
+              <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/signup">Signup</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/login">Login</a>
+            </li>
+            {% endif %}           
+          </ul>
+
+          
+        </div>
+      </div>
+      
+    </nav>
+    <marquee style="background: #000; color: #fff;" scrollamount="10" class="">Currently we are delivering in Bhiwani and Charkhi Dadri districts only
+         (including all villages) with guaranteed delivery within 3 days.</marquee>
+    <marquee style="background: yellow; color: red;" scrollamount="7" class="mb-2">After adding products in cart, please visit cart to place order.</marquee>
+
+
+<div class="container">
+    <div class="m-4">
+        <div class="col-lg-4 mx-auto border rounded p-5" style="background-color: skyblue;">
+            <h3 style="text-align: center;" class="pb-4"><b>Login</b></h3>
+            <form action="/login" method="POST">
+                  {% csrf_token %}
+
+                  {% if error %}
+                  <div class="alert alert-danger" role="alert">
+                    {{error}}
+                  </div>
+                  {% endif %}
+                  
+                <!--phone-->
+                <div class="form-group mb-2">
+                    <label for="phone"><b>Phone Number</b></label>
+                    <input required type="text" name="phone" id="" value="{{values.phone}}" class="form-control form-control-sm" placeholder="0123456789">
+                  </div>
+
+                
+                <!--password-->
+                <div class="form-group mb-2">
+                    <label for="password"><b>Password</b></label>
+                    <input required type="password" name="password" id="" class="form-control form-control-sm" placeholder="********">
+                </div>
+
+                <div class="form-group mb-2" style="width: 100%; border: none; cursor: pointer; margin: 10px 0;">
+                    <input style=" color: #ff523b;" class="col-lg-4" type="submit" value="Login">
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    -->
+
+    <!-------- footer -------->
+
+    <div class="footer">
+      <div class="container">
+          <div class="row">
+              <div class="footer-col-1">
+                  
+              </div>
+          </div>
+          <hr>
+          <div class="social">
+              <a class="fa fa-facebook" href="https://www.facebook.com/S-K-Mobiles-103632208331202/?ti=as/" target="_blank"></a>
+              <a class="fa fa-instagram" href="https://www.instagram.com/skmobiles.cd/" target="_blank"></a>
+             <!-- <a class="fa fa-twitter" href="https://www.twitter.com/" target="_blank"></a>-->
+          </div>
+         <!-- <p class="copyright">© Copyright 2020-21 : S K Mobiles</p>-->
+      </div>
+  </div>
+  
+
+  </body>
+</html>

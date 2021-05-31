@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load cart %}
+{% load custom_filter %}
+<div class="container" style="background-color: skyblue;">
+    <div class="border-2 rounded ">
+        <p class="display-4 pl-4 ml-4" style="text-align: center;"><b>Your Cart</b></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Product</th>
+                    <th style="text-align: center;">Price</th>
+                    <th style="text-align: center;">Quantity</th>
+                    <th style="text-align: center;">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for product in products %}
+                <tr>
+                    <td scope="row"><img src="{{product.image.url}}" style="height: 50px; width: 50px;"></td>
+                    <td>{{product.name}}</td>
+                    <td style="text-align: center;">{{product.price|currency}}</td>
+                    <td style="text-align: center;">{{product|cart_quantity:request.session.cart}}</td>
+                    <td style="text-align: center;">{{product|price_total:request.session.cart|currency}}</td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <th colspan="4">Total</th>
+                        <th style="text-align: center;">{{products|total_cart_price:request.session.cart|currency}}</th>
+                    </th>
+                </tr>
+            </tfoot>
+            <div class="m-3 p-3 mb-5">
+                <a href="#" data-toggle="modal" data-target="#exampleModal" 
+                class="btn btn-outline-info border-2 rounded col-lg-2 float-right" style="background-color: yellow;">Place Order</a>
+            </div>
+        </table>
+
+            <div class="m-3 p-3 mb-5">
+                <a href="#" data-toggle="modal" data-target="#exampleModal" 
+                class="btn btn-outline-info border-2 rounded col-lg-2 float-right" style="background-color: yellow;">Place Order</a>
+            </div>
+            
+    </div>
+</div>
+
+<!-------- Modal -------->
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" 
+  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Check Out Form</h5>
+          <hr>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="background-color: skyblue;">
+          <div class="m-2 p-3">
+              <form action="/check-out" method="POST">
+                {% csrf_token %}
+                <div class="form_group mt-2">
+                    <label for=""><b>Name</b></label>
+                    <input type="text" name="name" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                </div>
+                <div class="form_group mt-2">
+                    <label for=""><b>Address for delivery</b></label>
+                    <input type="text" name="address" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                </div>
+                <div class="form_group mt-2">
+                    <label for=""><b>Phone</b></label>
+                    <input type="text" name="phone" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                </div>
+
+                <input type="submit" class="btn btn-outline-info mt-3" style="background-color: yellow;" value="Submit Order">
+              </form>
+          </div>
+        </div>
+      <!--  <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+         
+        </div>   -->
+      </div>
+    </div>
+  </div>
+
+  
+{% endblock %}
